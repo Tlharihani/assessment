@@ -24,7 +24,6 @@ public class ClientController {
     @PostMapping("/create")
     private ResponseEntity<Client> createClient(@RequestBody Client client) {
         return new ResponseEntity<>(this.clientService.save(client), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/client/id-number/{idNumber}")
