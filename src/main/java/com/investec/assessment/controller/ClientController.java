@@ -27,17 +27,17 @@ public class ClientController {
     }
 
     @GetMapping("/client/id-number/{idNumber}")
-    private ResponseEntity<Client> getByIdnumber(@RequestParam String idNumber) {
+    private ResponseEntity<Client> getByIdnumber(@PathVariable String idNumber) {
         return new ResponseEntity<>(this.clientService.findByIdNumber(idNumber), HttpStatus.OK);
     }
 
     @GetMapping("/client/mobile-number/{mobileNumber}")
-    private ResponseEntity<Client> getByMobileNumber(@RequestParam String mobileNumber) {
+    private ResponseEntity<Client> getByMobileNumber(@PathVariable String mobileNumber) {
         return new ResponseEntity<>(this.clientService.findByMobileNumber(mobileNumber), HttpStatus.OK);
     }
 
     @GetMapping("/client/first-name/{firstName}")
-    private ResponseEntity<List<Client>> getByFirstName(@RequestParam String firstName) {
+    private ResponseEntity<List<Client>> getByFirstName(@PathVariable String firstName) {
         return new ResponseEntity<>(this.clientService.findByFirstName(firstName), HttpStatus.OK);
     }
 

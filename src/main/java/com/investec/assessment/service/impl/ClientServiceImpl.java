@@ -28,7 +28,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client save(Client client) {
         try {
-            if( this.validateMandatoryField(client) && this.validateIdNumber(client.getIdNumber()) && this.validateMobileNumber(client.getMobileNumber())) {
+            if( this.validateMandatoryField(client) && this.validateIdNumber(client.getIdNumber())
+                    && this.validateMobileNumber(client.getMobileNumber())) {
                 return this.clientRepo.save(client);
                 } else {
                 throw new BadRequestException();

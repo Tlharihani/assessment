@@ -71,7 +71,6 @@ public class ClientRepoTest {
     @Test
     public void findByFirstName() {
         List<Client> clients = this.getClients();
-       this.clientRepo.saveAll(clients);
         Optional<List<Client>> clients1 = clientRepo.findByFirstname("Tlharihani");
         if(clients1.isPresent()){
             assertEquals(clients1.get().size() > 0, true);
@@ -83,7 +82,7 @@ public class ClientRepoTest {
         client.setFirstname("Tlharihani");
         client.setLastname("Baloyi");
         client.setIdNumber("9212205682181");
-        client.setMobileNumber("0671347263");
+        client.setMobileNumber("0671347267");
         client.setPhysicalAddress("ebony park");
         return client;
     }
@@ -102,14 +101,14 @@ public class ClientRepoTest {
         client1.setFirstname("Tlharihani");
         client1.setLastname("Baloyi");
         client1.setIdNumber("9212205682181");
-        client1.setMobileNumber("0671347263");
+        client1.setMobileNumber("0671347264");
         client1.setPhysicalAddress("ebony park");
 
         Client client2 = new Client();
         client2.setFirstname("Tlhari");
         client2.setLastname("Baloyi");
         client2.setIdNumber("9212205682181");
-        client2.setMobileNumber("0671347263");
+        client2.setMobileNumber("0671347265");
         client2.setPhysicalAddress("ebony park");
         List<Client> list = new ArrayList<>();
         list.add(client);

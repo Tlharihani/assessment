@@ -15,9 +15,9 @@ public class Client {
     private String firstname;
     @Column(name = "lastname", nullable = false)
     private String lastname;
-    @Column(name = "mobile_number")
+    @Column(name = "mobile_number", nullable = false, unique = true)
     private String mobileNumber;
-    @Column(name = "id_number", nullable = false)
+    @Column(name = "id_number", nullable = false, unique = true)
     private String idNumber;
     @Column(name = "physical_address")
     private String physicalAddress;
