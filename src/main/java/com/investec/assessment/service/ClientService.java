@@ -10,5 +10,4 @@ public interface ClientService {
     Client findByIdNumber(String idNumber);
     Client findByMobileNumber(String mobileNumber);
     List<Client> findByFirstName(String firstName);
-    public Client updateClient(Client client);
 }

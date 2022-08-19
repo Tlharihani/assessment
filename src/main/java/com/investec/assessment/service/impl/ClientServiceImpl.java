@@ -72,20 +72,6 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
-    @Override
-    public Client updateClient(Client client) {
-        try {
-            if (this.validateMandatoryField(client) && this.validateIdNumber(client.getIdNumber())
-                    && this.validateMobileNumber(client.getMobileNumber())) {
-                return this.clientRepo.save(client);
-            } else {
-                throw new BadRequestException();
-            }
-        } catch (Exception exception) {
-            throw exception;
-        }
-    }
-
     private boolean validateIdNumber(String idNumber) {
         if (idNumber.isEmpty()) {
             throw new IdNumberMandatoryException();
