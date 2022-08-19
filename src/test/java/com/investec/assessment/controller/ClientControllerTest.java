@@ -19,10 +19,11 @@ public class ClientControllerTest extends AbstractTest {
 
     private Client client;
 
-    private String createUrl = "/api/create";
+    private String createUrl = "/api/client/create";
     private String idNumberUrl = "/api/client/id-number/{idNumber}";
     private String mobileNumberUrl  = "/api/client/mobile-number/{mobileNumber}";
     private String firstNameUrl = "/api/client/first-name/{firstName}";
+    private String updateUrl = "/api/client/update";
 
 
 
@@ -60,6 +61,17 @@ public class ClientControllerTest extends AbstractTest {
        int status = mvcResult.getResponse().getStatus();
        assertEquals(201,status);
     }
+
+    @Test
+    public void updateClient()  throws Exception {
+        String inputJson = super.mapToJson(this.client);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(this.updateUrl)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200,status);
+    }
     @Test
     public void createClientWithInvalidId()  throws Exception {
 
@@ -75,9 +87,25 @@ public class ClientControllerTest extends AbstractTest {
         String content = mvcResult.getResponse().getContentAsString();
         assertEquals(content,"Invalid Id Number");
     }
+
+    @Test
+    public void updateClientWithInvalidId()  throws Exception {
+        client.setIdNumber("12345678");
+        String inputJson = super.mapToJson(client);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(this.updateUrl)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(400,status);
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(content,"Invalid Id Number");
+    }
     @Test
     public void createClientWithDuplicateIdNumber()  throws Exception {
-        String inputJson = super.mapToJson(this.client);
+        Client client1 = this.getClient();
+        client1.setIdNumber(this.client.getIdNumber());
+        String inputJson = super.mapToJson(client1);
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(this.createUrl)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(inputJson)).andReturn();
@@ -122,10 +150,41 @@ public class ClientControllerTest extends AbstractTest {
     }
 
     @Test
+    public void updateClientWithInvalidMobileNumber()  throws Exception {
+        client.setMobileNumber("");
+        String inputJson = super.mapToJson(client);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(this.updateUrl)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(400,status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(content,"Invalid Mobile Number");
+    }
+
+    @Test
     public void createClientWithoutIdNumber()  throws Exception {
         this.client.setIdNumber("");
         String inputJson = super.mapToJson(this.client);
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(this.createUrl)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(400,status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(content,"Id number is Mandatory");
+
+    }
+
+    @Test
+    public void updateClientWithoutIdNumber()  throws Exception {
+        this.client.setIdNumber("");
+        String inputJson = super.mapToJson(this.client);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(this.updateUrl)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(inputJson)).andReturn();
 
@@ -153,6 +212,22 @@ public class ClientControllerTest extends AbstractTest {
         assertEquals(content,"First name is Mandatory");
 
     }
+    @Test
+    public void updateClientWithoutFirstname()  throws Exception {
+        client.setFirstname("");
+        String inputJson = super.mapToJson(client);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(this.updateUrl)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(400,status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(content,"First name is Mandatory");
+
+    }
+
 
     @Test
     public void createClientWithoutLastName()  throws Exception {
@@ -168,7 +243,21 @@ public class ClientControllerTest extends AbstractTest {
 
         String content = mvcResult.getResponse().getContentAsString();
         assertEquals(content,"Last name is Mandatory");
+    }
 
+    @Test
+    public void updateClientWithoutLastName()  throws Exception {
+        client.setLastname("");
+        String inputJson = super.mapToJson(client);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(this.updateUrl)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(400,status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(content,"Last name is Mandatory");
     }
 
    @Test

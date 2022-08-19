@@ -1,6 +1,5 @@
 package com.investec.assessment.exception.controller;
 
-import com.investec.assessment.exception.InvalidIdNumberException;
 import com.investec.assessment.exception.IdNumberMandatoryException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

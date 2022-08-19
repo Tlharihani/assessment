@@ -1,7 +1,6 @@
 package com.investec.assessment.exception.controller;
 
 import com.investec.assessment.exception.BadRequestException;
-import com.investec.assessment.exception.ClientNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

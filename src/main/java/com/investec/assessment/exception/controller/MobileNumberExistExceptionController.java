@@ -1,6 +1,5 @@
 package com.investec.assessment.exception.controller;
 
-import com.investec.assessment.exception.IdNumberExistException;
 import com.investec.assessment.exception.MobileNumberExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
